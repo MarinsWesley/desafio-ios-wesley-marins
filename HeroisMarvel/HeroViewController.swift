@@ -13,31 +13,56 @@ class HeroViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var loading: UIActivityIndicatorView!
-    
-	var hero1: Hero!
+
+    var hero1: Hero!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-		let url = URL(string: hero1.urls.first!.url)
-		let request = URLRequest(url: url!)
-		title = hero1.name
-		
-		
-		webView.allowsBackForwardNavigationGestures = true
-		webView.navigationDelegate = self
-		webView.load(request)
-		
+
+        guard let hero = hero1 else {
+            return
+        }
+
+        title = hero.name
+
+        webView.allowsBackForwardNavigationGestures = true
+        webView.navigationDelegate = self
+
+        let searchText = hero.name.addingPercentEncoding(
+            withAllowedCharacters: .urlQueryAllowed
+        ) ?? hero.name
+
+        let urlString = "https://en.wikipedia.org/wiki/Special:Search?search=\(searchText)"
+
+        guard let url = URL(string: urlString) else {
+            return
+        }
+
+        let request = URLRequest(url: url)
+
+        loading.startAnimating()
+        webView.load(request)
     }
-	
-	func getCharacterID () -> String {
-		let characterID = hero1.id
-		return String(characterID)
-	}
+
+    func getCharacterID() -> String {
+        return hero1.id
+    }
 }
 
 extension HeroViewController: WKNavigationDelegate {
-	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		loading.stopAnimating()
-	}
+
+    func webView(
+        _ webView: WKWebView,
+        didFinish navigation: WKNavigation!
+    ) {
+        loading.stopAnimating()
+    }
+
+    func webView(
+        _ webView: WKWebView,
+        didFail navigation: WKNavigation!,
+        withError error: Error
+    ) {
+        loading.stopAnimating()
+    }
 }
-
-
