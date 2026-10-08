@@ -1,5 +1,7 @@
 Heróis Marvel
+
 Aplicativo iOS desenvolvido em Swift como projeto de estudo e prática de desenvolvimento iOS.
+
 O projeto foi originalmente desenvolvido em 2022 e posteriormente atualizado e modernizado para atender aos requisitos do iOS 27 e Xcode 27, incluindo a atualização das dependências e a substituição da API originalmente utilizada.
 🛠️ Tecnologias
 - Swift
