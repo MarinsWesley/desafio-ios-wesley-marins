@@ -3,7 +3,7 @@
 //  HeroisMarvel
 //
 //  Created by MacbookAirWesley on 01/08/22.
-//  Copyright © 2022 Eric Brito. All rights reserved.
+//  Copyright © 2027
 //
 
 import UIKit
